@@ -2,3 +2,4 @@
 .vscode/
 speedpackVenv/
 *.log
+**/__pycache__/
