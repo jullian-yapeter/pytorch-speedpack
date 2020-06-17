@@ -1,0 +1,13 @@
+{
+	"dataLoaderNode":{},
+	"edaNode":{},
+	"dataAugmentationNode":{},
+	"modelFeatureNode":{},
+	"modelHeadNode":{},
+	"modelNode":{},
+	"lossNode":{},
+	"optimizerNode":{},
+	"resultsFolderNode":{},
+	"autoDocumentationNode":{},
+	"webInterfaceNode":{}
+}
