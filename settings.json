@@ -1,5 +1,7 @@
 {
-	"dataLoaderNode":{},
+	"dataLoaderNode":{
+		"dataDir":"../sampleDataset/"
+	},
 	"edaNode":{},
 	"dataAugmentationNode":{},
 	"modelFeatureNode":{},
