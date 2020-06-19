@@ -1,4 +1,5 @@
-from logs.speedpackLogger import logs
+from executionNodes.loggerNode import logs
+from deviceManager import DeviceManager as DM
 
 from torch.utils.data import DataLoader
 from torchvision import transforms, datasets
