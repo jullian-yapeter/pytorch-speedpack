@@ -3,7 +3,6 @@ import logging.handlers
 
 
 class Logs():
-
     def __init__(self):
         formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
         self.dataLoader = self.setup_logger(name='dataLoader', log_file='logs/dataLoader.log', formatter=formatter)

@@ -6,6 +6,7 @@ class DeviceManager():
         """
         constructor
         manages the selection and loading of computing device
+        :attr device [torch.device] : selected device
         """
         self.device = self.getDefaultDevice()
 
@@ -24,3 +25,6 @@ class DeviceManager():
         if isinstance(data, (list, tuple)):
             return [self.moveToDevice(d) for d in data]
         return data.to(self.device, non_blocking=True)
+
+
+deviceManager = DeviceManager()
