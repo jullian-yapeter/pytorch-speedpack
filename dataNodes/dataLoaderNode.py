@@ -33,12 +33,21 @@ class DatasetLoader():
 
 
 class DeviceDataLoader():
-    def __init__(self, dataloader):
-        self.dataloader = dataloader
+    def __init__(self, dataLoader):
+        """
+        constructor
+        wraps the PyTorch dataloader in class that handles the moving of data onto the optimal device
+        :attr dataloader [torch.utils.data.DataLoader] : the PyTorch Dataloader of a dataset to be wrapped
+        """
+        self.dataLoader = dataLoader
 
     def __iter__(self):
-        for batch in self.dataloader:
+        """
+        Generates a batch of data from the given Dataloader that has been moved to the optimal device
+        :yield [torch.Tensor] : moved batch of data
+        """
+        for batch in self.dataLoader:
             yield DM.moveToDevice(batch)
 
     def __len__(self):
-        return len(self.dataloader)
+        return len(self.dataLoader)

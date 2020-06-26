@@ -4,6 +4,21 @@ import logging.handlers
 
 class Logs():
     def __init__(self):
+        """
+        constructor
+        creates the loggers for all the different modules in one encapsulated object
+        :attr dataLoader        [logging.Logger] : logger #1  for dataLoaderNode
+        :attr eda               [logging.Logger] : logger #2  for eda
+        :attr dataAugmentation  [logging.Logger] : logger #3  for dataAugmentation
+        :attr modelFeature      [logging.Logger] : logger #4  for modelFeature
+        :attr modelHead         [logging.Logger] : logger #5  for modelHead
+        :attr model             [logging.Logger] : logger #6  for model
+        :attr loss              [logging.Logger] : logger #7  for loss
+        :attr optimizer         [logging.Logger] : logger #8  for optimizer
+        :attr resultsFolder     [logging.Logger] : logger #9  for resultsFolder
+        :attr autoDocumentation [logging.Logger] : logger #10 for autoDocumentation
+        :attr interface         [logging.Logger] : logger #11 for interface
+        """
         formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
         self.dataLoader = self.setup_logger(name='dataLoader', log_file='logs/dataLoader.log', formatter=formatter)
         self.eda = self.setup_logger(name='eda', log_file='logs/eda.log', formatter=formatter)
@@ -19,18 +34,20 @@ class Logs():
                                                formatter=formatter)
         self.autoDocumentation = self.setup_logger(name='autoDocumentation', log_file='logs/autoDocumentation.log',
                                                    formatter=formatter)
-        self.webInterface = self.setup_logger(name='webInterface', log_file='logs/webInterface.log',
-                                              formatter=formatter)
+        self.interface = self.setup_logger(name='interface', log_file='logs/interface.log',
+                                           formatter=formatter)
 
     def setup_logger(self, name, log_file, formatter, level=logging.INFO):
+        """
+        helper function to set up the behaviour of the logger
+        :return [logging.Logger] : rolling logger with desired name and behaviour
+        """
         handler = logging.handlers.RotatingFileHandler(log_file, mode='a', maxBytes=5*1024*1024,
                                                        backupCount=2, encoding=None, delay=0)
         handler.setFormatter(formatter)
-
         logger = logging.getLogger(name)
         logger.setLevel(level)
         logger.addHandler(handler)
-
         return logger
 
 
