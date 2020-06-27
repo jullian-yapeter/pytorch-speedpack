@@ -8,16 +8,17 @@ class Logs():
         constructor
         creates the loggers for all the different modules in one encapsulated object
         :attr dataLoader        [logging.Logger] : logger #1  for dataLoaderNode
-        :attr eda               [logging.Logger] : logger #2  for eda
-        :attr dataAugmentation  [logging.Logger] : logger #3  for dataAugmentation
-        :attr modelFeature      [logging.Logger] : logger #4  for modelFeature
-        :attr modelHead         [logging.Logger] : logger #5  for modelHead
-        :attr model             [logging.Logger] : logger #6  for model
-        :attr loss              [logging.Logger] : logger #7  for loss
-        :attr optimizer         [logging.Logger] : logger #8  for optimizer
-        :attr resultsFolder     [logging.Logger] : logger #9  for resultsFolder
-        :attr autoDocumentation [logging.Logger] : logger #10 for autoDocumentation
-        :attr interface         [logging.Logger] : logger #11 for interface
+        :attr eda               [logging.Logger] : logger #2  for edaNode
+        :attr dataAugmentation  [logging.Logger] : logger #3  for dataAugmentationNode
+        :attr modelFeature      [logging.Logger] : logger #4  for modelFeatureNode
+        :attr modelHead         [logging.Logger] : logger #5  for modelHeadNode
+        :attr model             [logging.Logger] : logger #6  for modelNode
+        :attr loss              [logging.Logger] : logger #7  for lossNode
+        :attr optimizer         [logging.Logger] : logger #8  for optimizerNode
+        :attr resultsFolder     [logging.Logger] : logger #9  for resultsFolderNode
+        :attr autoDocumentation [logging.Logger] : logger #10 for autoDocumentationNode
+        :attr interface         [logging.Logger] : logger #11 for interfaceNode
+        :attr debugger          [logging.Logger] : logger #12 for debuggingNodes
         """
         formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
         self.dataLoader = self.setup_logger(name='dataLoader', log_file='logs/dataLoader.log', formatter=formatter)
@@ -35,6 +36,8 @@ class Logs():
         self.autoDocumentation = self.setup_logger(name='autoDocumentation', log_file='logs/autoDocumentation.log',
                                                    formatter=formatter)
         self.interface = self.setup_logger(name='interface', log_file='logs/interface.log',
+                                           formatter=formatter)
+        self.debugging = self.setup_logger(name='debugging', log_file='logs/debugging.log',
                                            formatter=formatter)
 
     def setup_logger(self, name, log_file, formatter, level=logging.INFO):

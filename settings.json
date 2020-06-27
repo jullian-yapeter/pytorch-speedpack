@@ -11,5 +11,5 @@
 	"optimizerNode":{},
 	"resultsFolderNode":{},
 	"autoDocumentationNode":{},
-	"webInterfaceNode":{}
+	"interfaceNode":{}
 }
