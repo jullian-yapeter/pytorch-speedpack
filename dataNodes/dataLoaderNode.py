@@ -1,12 +1,13 @@
 from executionNodes.loggerNode import logs
 from executionNodes.deviceManager import deviceManager as DM
 from torch.utils.data import DataLoader
-from torchvision import transforms, datasets
+from torchvision import datasets
+import torchvision.transforms as tt
 
 
 class DatasetLoader():
     def __init__(self, dataDir, batchSize=4, numWorkers=4,
-                 dataAugmentationObj={'train': transforms.ToTensor(), 'test': transforms.ToTensor()}):
+                 dataAugmentationObj={'train': tt.ToTensor(), 'test': tt.ToTensor()}):
         """
         constructor
         manages the reading of raw data and preparing it into a PyTorch train & test datasets
