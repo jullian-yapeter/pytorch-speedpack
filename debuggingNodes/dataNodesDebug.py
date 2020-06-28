@@ -5,10 +5,21 @@ import json
 
 class DataNodesDebugPackage():
     def __init__(self):
-        with open('settings.json') as settingsFile:
-            self.settings = json.load(settingsFile)["dataLoaderNode"]
+        """
+        constructor
+        :attr settings [dict] : dictionary of user defined settings for Speedpack
+        """
+        try:
+            with open('settings.json') as settingsFile:
+                self.settings = json.load(settingsFile)["dataLoaderNode"]
+        except Exception as e:
+            logs.debugging.error("Error while opening settings file, %s", e)
 
     def testVanillaDatasetLoader(self):
+        """
+        test the default dataset loader using the defined dataset directory
+        :return result [bool] : result of whether the test passed or failed
+        """
         result = True
         try:
             _ = DatasetLoader(self.settings["dataDir"])
@@ -19,6 +30,10 @@ class DataNodesDebugPackage():
 
 
 def run():
+    """
+    run the DataNodesDebugPackage and log errors/successes
+    :return result [bool] : result of whether the test passed or failed
+    """
     result = True
     debugPackage = DataNodesDebugPackage()
     result = debugPackage.testVanillaDatasetLoader() and result

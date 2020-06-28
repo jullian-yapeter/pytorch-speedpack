@@ -10,6 +10,10 @@ class DatasetLoader():
         """
         constructor
         manages the reading of raw data and preparing it into a PyTorch train & test datasets
+        :arg  dataDir [String] : directory of data
+        :arg batchSize [int] : number of datapoints for one batch of training
+        :arg numWorkers [int] : number of workers to perform the data loading
+        :arg dataAugmentationObj [dict] : instructions for data augmentation to be performed during training/testing
         :attr trainDataset [torch.utils.data.Dataset] : the dataset of training images
         :attr testDataset [torch.utils.data.Dataset] : the dataset of testing images
         """
