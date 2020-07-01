@@ -13,6 +13,7 @@ class DatasetAugmentation():
         try:
             with open('settings.json') as settingsFile:
                 self.settings = json.load(settingsFile)["dataAugmentationNode"]
+            logs.debugging.info("data augmentation settings loaded successfully")
         except Exception as e:
             logs.debugging.error("Error while opening settings file, %s", e)
 

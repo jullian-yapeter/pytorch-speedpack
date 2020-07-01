@@ -3,3 +3,4 @@
 speedpackVenv/
 *.log
 **/__pycache__/
+*.png
