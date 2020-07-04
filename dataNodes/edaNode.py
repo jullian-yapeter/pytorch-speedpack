@@ -29,16 +29,12 @@ class EdaManager():
         cacheImages = []
         cacheLabels = []
         for images, labels in self.datasetLoader.trainDeviceDataLoader:
-            print("images.len: ", len(images))
-            print("images.shape: ", images[0].shape)
             cacheImages.extend(images)
             cacheLabels.extend(labels)
-            print("cacheimages.len: ", len(cacheImages))
             if len(cacheImages) >= numTotal:
                 break
         fig = plt.figure()
         for n, (image, label) in enumerate(zip(cacheImages, cacheLabels)):
-            print("hi")
             if n >= numTotal:
                 break
             image = image.permute(1, 2, 0)
@@ -48,7 +44,7 @@ class EdaManager():
             ax.imshow(image)
             ax.set_title(n)  # label
         fig.set_size_inches(np.array(fig.get_size_inches()) * numTotal)
-        plt.savefig("edaResults/rawExamplesTraining.png")
+        fig.savefig("edaResults/rawExamplesTraining.png")
         return True
 
     def augmentedExamples(self):
