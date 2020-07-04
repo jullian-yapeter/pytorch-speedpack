@@ -77,7 +77,7 @@ def run():
     """
     result = True
     debugPackage = DataNodesDebugPackage()
-    result = debugPackage.testVanillaDatasetLoader() and result
+    # result = debugPackage.testVanillaDatasetLoader() and result
     result = debugPackage.testVanillaEdaManager() and result
     logs.debugging.info("DEBUG: DataNodesDebug finished running")
     return result
