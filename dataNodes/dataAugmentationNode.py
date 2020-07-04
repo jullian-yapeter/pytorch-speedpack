@@ -1,6 +1,6 @@
 from executionNodes.loggerNode import logs
+from executionNodes.settings import SettingsManager
 import torchvision.transforms as tt
-import json
 
 
 class DatasetAugmentation():
@@ -11,8 +11,8 @@ class DatasetAugmentation():
         """
         self.transforms = self.composeTransforms
         try:
-            with open('settings.json') as settingsFile:
-                self.settings = json.load(settingsFile)["dataAugmentationNode"]
+            sm = SettingsManager()
+            self.dataAugmentationSettings = sm.readField["dataAugmentationNode"]
             logs.debugging.info("data augmentation settings loaded successfully")
         except Exception as e:
             logs.debugging.error("Error while opening settings file, %s", e)
@@ -22,16 +22,16 @@ class DatasetAugmentation():
         trainTransforms = []
         testTransforms = []
         # construct training transforms
-        if "hflip" in self.settings["train"]:
+        if "hflip" in self.dataAugmentationSettings["train"]:
             trainTransforms.append(tt.RandomHorizontalFlip())
-        if "vflip" in self.settings["train"]:
+        if "vflip" in self.dataAugmentationSettings["train"]:
             trainTransforms.append(tt.RandomVerticalFlip())
         trainTransforms.append(tt.ToTensor())
         transforms["train"] = tt.Compose(trainTransforms)
         # construct testing transforms
-        if "hflip" in self.settings["test"]:
+        if "hflip" in self.dataAugmentationSettings["test"]:
             testTransforms.append(tt.RandomHorizontalFlip())
-        if "vflip" in self.settings["test"]:
+        if "vflip" in self.dataAugmentationSettings["test"]:
             testTransforms.append(tt.RandomVerticalFlip())
         testTransforms.append(tt.ToTensor())
         transforms["test"] = tt.Compose(testTransforms)

@@ -2,7 +2,6 @@ import torch
 from torch.utils.data import DataLoader
 from torchvision import datasets
 import torchvision.transforms as tt
-
 from executionNodes.loggerNode import logs
 from executionNodes.deviceManager import deviceManager as DM
 

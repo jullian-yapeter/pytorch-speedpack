@@ -1,7 +1,7 @@
 from dataNodes.dataLoaderNode import DatasetLoader, classificationCollate
 from dataNodes.edaNode import EdaManager
 from executionNodes.loggerNode import logs
-import json
+from executionNodes.settings import SettingsManager
 
 
 class DataNodesDebugPackage():
@@ -11,8 +11,8 @@ class DataNodesDebugPackage():
         :attr settings [dict] : dictionary of user defined settings for Speedpack
         """
         try:
-            with open('settings.json') as settingsFile:
-                self.settings = json.load(settingsFile)["dataLoaderNode"]
+            sm = SettingsManager()
+            self.dataLoaderSettings = sm.readField("dataLoaderNode")
             logs.debugging.info("DEBUG: DatasetLoaderNode settings loaded successfully")
         except Exception as e:
             logs.debugging.error("DEBUG: Error while opening settings file, %s", e)
@@ -24,7 +24,7 @@ class DataNodesDebugPackage():
         """
         result = True
         try:
-            datasetLoader = DatasetLoader(self.settings["dataDir"], collateFn=classificationCollate)
+            datasetLoader = DatasetLoader(self.dataLoaderSettings["dataDir"], collateFn=classificationCollate)
             logs.debugging.info("testVanillaDatasetLoader: DatasetLoader creation successful")
         except Exception as e:
             result = False
@@ -54,7 +54,7 @@ class DataNodesDebugPackage():
         """
         result = True
         try:
-            datasetLoader = DatasetLoader(self.settings["dataDir"], collateFn=classificationCollate)
+            datasetLoader = DatasetLoader(self.dataLoaderSettings["dataDir"], collateFn=classificationCollate)
             edaManager = EdaManager(datasetLoader)
             logs.debugging.info("testVanillaEdaManager: EdaManager creation successful")
         except Exception as e:
@@ -77,7 +77,7 @@ def run():
     """
     result = True
     debugPackage = DataNodesDebugPackage()
-    # result = debugPackage.testVanillaDatasetLoader() and result
+    result = debugPackage.testVanillaDatasetLoader() and result
     result = debugPackage.testVanillaEdaManager() and result
     logs.debugging.info("DEBUG: DataNodesDebug finished running")
     return result

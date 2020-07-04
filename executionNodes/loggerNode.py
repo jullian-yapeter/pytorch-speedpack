@@ -35,10 +35,9 @@ class Logs():
                                                formatter=formatter)
         self.autoDocumentation = self.setup_logger(name='autoDocumentation', log_file='logs/autoDocumentation.log',
                                                    formatter=formatter)
-        self.interface = self.setup_logger(name='interface', log_file='logs/interface.log',
-                                           formatter=formatter)
-        self.debugging = self.setup_logger(name='debugging', log_file='logs/debugging.log',
-                                           formatter=formatter)
+        self.interface = self.setup_logger(name='interface', log_file='logs/interface.log', formatter=formatter)
+        self.debugging = self.setup_logger(name='debugging', log_file='logs/debugging.log', formatter=formatter)
+        self.settings = self.setup_logger(name='settings', log_file='logs/settings.log', formatter=formatter)
 
     def setup_logger(self, name, log_file, formatter, level=logging.INFO):
         """
