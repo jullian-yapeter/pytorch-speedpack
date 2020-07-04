@@ -42,7 +42,7 @@ class EdaManager():
             if image.ndim == 2:
                 plt.gray()
             ax.imshow(image)
-            ax.set_title(n)  # label
+            ax.set_title(label)
         fig.set_size_inches(np.array(fig.get_size_inches()) * numTotal)
         fig.savefig("edaResults/rawExamplesTraining.png")
         return True
