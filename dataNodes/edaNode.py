@@ -59,7 +59,12 @@ class EdaManager():
         return True
 
     def getNumDatapoints(self):
-        pass
+        """
+        :return numTrain, numTest [int, int] : number of datapoints in training and test set
+        """
+        numTrain = len(self.datasetLoader.trainDeviceDataLoader)
+        numTest = len(self.datasetLoader.testDeviceDataLoader)
+        return [numTrain, numTest]
 
     def getClasses(self):
         pass

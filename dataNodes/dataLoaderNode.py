@@ -79,4 +79,4 @@ class DeviceDataLoader():
             yield DM.moveToDevice(batch)
 
     def __len__(self):
-        return len(self.dataLoader)
+        return len(self.dataLoader.dataset)

@@ -96,13 +96,20 @@ class DataNodesDebugPackage():
         except Exception as e:
             result = False
             logs.debugging.error("testVanillaEdaManager: EdaManager creation unsuccessful: %s", e)
-        # debug the randomExamples function
+        # debug the rawExamples function
         try:
             edaManager.rawExamples([3, 3], "Vanilla")
             logs.debugging.info("testVanillaEdaManager: rawExamples function successful")
         except Exception as e:
             result = False
             logs.debugging.error("testVanillaEdaManager: rawExamples function unsuccessful: %s", e)
+        # debug the getNumDatapoints function
+        try:
+            edaManager.getNumDatapoints()
+            logs.debugging.info("testVanillaEdaManager: getNumDatapoints function successful")
+        except Exception as e:
+            result = False
+            logs.debugging.error("testVanillaEdaManager: getNumDatapoints function unsuccessful: %s", e)
         return result
 
     def testAugmentedEdaManager(self):
@@ -140,7 +147,7 @@ def run():
     debugPackage = DataNodesDebugPackage()
     # result = debugPackage.testVanillaDatasetLoader() and result
     # result = debugPackage.testAugmentedDatasetLoader() and result
-    # result = debugPackage.testVanillaEdaManager() and result
-    result = debugPackage.testAugmentedEdaManager() and result
+    result = debugPackage.testVanillaEdaManager() and result
+    # result = debugPackage.testAugmentedEdaManager() and result
     logs.debugging.info("DEBUG: DataNodesDebug finished running")
     return result
