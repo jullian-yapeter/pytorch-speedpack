@@ -8,6 +8,8 @@ class DatasetAugmentation():
         """
         constructor
         create a PyTorch transforms for both the training and testing phase in accordance with defined settings
+        :attr dataAugmentationSettings [dict] : user-chosen options of augmentation to be applied
+        :attr transforms [dict] : dictionary of transforms (for training and test sets)
         """
         try:
             sm = SettingsManager()
@@ -18,6 +20,10 @@ class DatasetAugmentation():
         self.transforms = self.composeTransform()
 
     def composeTransform(self):
+        """
+        builds a PyTorch transform based on the passed in settings
+        :return transforms [dict] : dictionary of transforms (for training and test sets)
+        """
         transforms = {'train': tt.ToTensor(), 'test': tt.ToTensor()}  # default
         trainTransforms = []
         testTransforms = []
@@ -35,4 +41,5 @@ class DatasetAugmentation():
             testTransforms.append(tt.RandomVerticalFlip())
         testTransforms.append(tt.ToTensor())
         transforms["test"] = tt.Compose(testTransforms)
+        print(type(transforms))
         return transforms
