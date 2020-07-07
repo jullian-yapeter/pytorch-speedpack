@@ -6,11 +6,24 @@ from executionNodes.loggerNode import logs
 from executionNodes.deviceManager import deviceManager as DM
 
 
-def classificationCollate(batch):
-    data = [item[0] for item in batch]
-    target = [item[1] for item in batch]
-    target = torch.LongTensor(target)
-    return [data, target]
+class CollateOptions():
+    def __init__(self):
+        """
+        constructor
+        groups together a menu of collate options for use when loading data into batches
+        """
+        pass
+
+    @staticmethod
+    def generalCollate(batch):
+        """
+        Collates different sized images into batches
+        :return [data, target] [list, list] : a list of the data at hand, a list of the corresponding labels
+        """
+        data = [item[0] for item in batch]
+        target = [item[1] for item in batch]
+        target = torch.LongTensor(target)
+        return [data, target]
 
 
 class DatasetLoader():

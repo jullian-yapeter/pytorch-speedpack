@@ -9,13 +9,13 @@ class DatasetAugmentation():
         constructor
         create a PyTorch transforms for both the training and testing phase in accordance with defined settings
         """
-        self.transforms = self.composeTransforms
         try:
             sm = SettingsManager()
-            self.dataAugmentationSettings = sm.readField["dataAugmentationNode"]
+            self.dataAugmentationSettings = sm.readField("dataAugmentationNode")
             logs.debugging.info("data augmentation settings loaded successfully")
         except Exception as e:
             logs.debugging.error("Error while opening settings file, %s", e)
+        self.transforms = self.composeTransform()
 
     def composeTransform(self):
         transforms = {'train': tt.ToTensor(), 'test': tt.ToTensor()}  # default

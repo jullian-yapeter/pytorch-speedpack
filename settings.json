@@ -3,7 +3,10 @@
 		"dataDir":"../sampleDataset/"
 	},
 	"edaNode":{},
-	"dataAugmentationNode":{},
+	"dataAugmentationNode":{
+        "train":["hflip", "vflip"],
+        "test":["hflip", "vflip"]
+    },
 	"modelFeatureNode":{},
 	"modelHeadNode":{},
 	"modelNode":{},

@@ -18,17 +18,17 @@ class EdaManager():
     def save(self, figure):
         pass
 
-    def rawExamples(self, dims):
+    def rawExamplesOneDataLoader(self, dims, dataLoader):
         """
         create a collage of data the size of passed in dims for both training and testing data
         :arg dims [[int, int]] : number of rows and cols of images to prepare
-        :return figure [[plt.figure, plt.figure]] : collage of desired dimensions for training and testing set
+        :return figure [plt.figure] : collage of desired dimensions for a set from given dataloader
         """
         numRows, numCols = dims
         numTotal = numRows * numCols
         cacheImages = []
         cacheLabels = []
-        for images, labels in self.datasetLoader.trainDeviceDataLoader:
+        for images, labels in dataLoader:
             cacheImages.extend(images)
             cacheLabels.extend(labels)
             if len(cacheImages) >= numTotal:
@@ -44,11 +44,19 @@ class EdaManager():
             ax.imshow(image)
             ax.set_title(label)
         fig.set_size_inches(np.array(fig.get_size_inches()) * numTotal)
-        fig.savefig("edaResults/rawExamplesTraining.png")
-        return True
+        return fig
 
-    def augmentedExamples(self):
-        pass
+    def rawExamples(self, dims, fileSuffix):
+        """
+        create a collage of data the size of passed in dims for both training and testing data
+        :arg dims [[int, int]] : number of rows and cols of images to prepare
+        :return figure [[plt.figure, plt.figure]] : collage of desired dimensions for training and testing set
+        """
+        trainFig = self.rawExamplesOneDataLoader(dims, self.datasetLoader.trainDeviceDataLoader)
+        trainFig.savefig(f"edaResults/rawExamplesTraining{fileSuffix}.png")
+        testFig = self.rawExamplesOneDataLoader(dims, self.datasetLoader.testDeviceDataLoader)
+        testFig.savefig(f"edaResults/rawExamplesTesting{fileSuffix}.png")
+        return True
 
     def getNumDatapoints(self):
         pass
