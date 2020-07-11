@@ -11,12 +11,6 @@ class EdaManager():
         """
         self.datasetLoader = datasetLoader
 
-    def show(self, figure):
-        pass
-
-    def save(self, figure):
-        pass
-
     def rawExamplesOneDataLoader(self, dims, deviceDataLoader):
         """
         create a collage of data the size of passed in dims for both training and testing data
@@ -69,6 +63,10 @@ class EdaManager():
         return [numTrain, numTest]
 
     def getClasses(self):
+        """
+        :return [str] : list of classes
+        """
+        return self.datasetLoader.trainDeviceDataLoader.dataLoader.dataset.classes
         pass
 
     def getMean(self):

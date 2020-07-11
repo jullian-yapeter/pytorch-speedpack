@@ -110,6 +110,12 @@ class DataNodesDebugPackage():
         except Exception as e:
             result = False
             logs.debugging.error("testVanillaEdaManager: getNumDatapoints function unsuccessful: %s", e)
+        try:
+            edaManager.getClasses()
+            logs.debugging.info("testAugmentedEdaManager: getClasses function successful")
+        except Exception as e:
+            result = False
+            logs.debugging.error("testAugmentedEdaManager: getClasses function unsuccessful: %s", e)
         return result
 
     def testAugmentedEdaManager(self):
@@ -135,6 +141,13 @@ class DataNodesDebugPackage():
         except Exception as e:
             result = False
             logs.debugging.error("testAugmentedEdaManager: rawExamples function unsuccessful: %s", e)
+        # debug the getClasses function
+        try:
+            edaManager.getClasses()
+            logs.debugging.info("testAugmentedEdaManager: getClasses function successful")
+        except Exception as e:
+            result = False
+            logs.debugging.error("testAugmentedEdaManager: getClasses function unsuccessful: %s", e)
         return result
 
 
