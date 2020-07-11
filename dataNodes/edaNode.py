@@ -1,6 +1,4 @@
 from matplotlib import pyplot as plt
-import numpy as np
-
 
 class EdaManager():
     def __init__(self, datasetLoader):
@@ -18,17 +16,18 @@ class EdaManager():
     def save(self, figure):
         pass
 
-    def rawExamplesOneDataLoader(self, dims, dataLoader):
+    def rawExamplesOneDataLoader(self, dims, deviceDataLoader):
         """
         create a collage of data the size of passed in dims for both training and testing data
         :arg dims [[int, int]] : number of rows and cols of images to prepare
         :return figure [plt.figure] : collage of desired dimensions for a set from given dataloader
         """
+        idxToClass = dict(map(reversed, deviceDataLoader.dataLoader.dataset.class_to_idx.items()))
         numRows, numCols = dims
         numTotal = numRows * numCols
         cacheImages = []
         cacheLabels = []
-        for images, labels in dataLoader:
+        for images, labels in deviceDataLoader:
             cacheImages.extend(images)
             cacheLabels.extend(labels)
             if len(cacheImages) >= numTotal:
@@ -42,8 +41,10 @@ class EdaManager():
             if image.ndim == 2:
                 plt.gray()
             ax.imshow(image)
-            ax.set_title(label)
-        fig.set_size_inches(np.array(fig.get_size_inches()) * numTotal)
+            ax.tick_params(axis="x", labelsize=3)
+            ax.tick_params(axis="y", labelsize=3)
+            ax.set_title(idxToClass.get(int(label)), fontsize=5)
+        plt.subplots_adjust(wspace=0.5, hspace=0.5)
         return fig
 
     def rawExamples(self, dims, fileSuffix):

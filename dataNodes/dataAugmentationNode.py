@@ -41,5 +41,4 @@ class DatasetAugmentation():
             testTransforms.append(tt.RandomVerticalFlip())
         testTransforms.append(tt.ToTensor())
         transforms["test"] = tt.Compose(testTransforms)
-        print(type(transforms))
         return transforms
