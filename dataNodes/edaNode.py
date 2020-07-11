@@ -1,5 +1,6 @@
 from matplotlib import pyplot as plt
 
+
 class EdaManager():
     def __init__(self, datasetLoader):
         """
