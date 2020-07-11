@@ -4,8 +4,16 @@
 	},
 	"edaNode":{},
 	"dataAugmentationNode":{
-        "train":["hflip", "vflip"],
-        "test":["hflip", "vflip"]
+        "train":{
+            "resize": [224, 224],
+            "hflip":0.5,
+            "vflip":0.5
+        },
+        "test":{
+            "resize": [224, 224],
+            "hflip":0.5,
+            "vflip":0.5
+        }
     },
 	"modelFeatureNode":{},
 	"modelHeadNode":{},
