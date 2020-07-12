@@ -1,4 +1,5 @@
 from matplotlib import pyplot as plt
+import numpy as np
 
 
 class EdaManager():
@@ -67,10 +68,17 @@ class EdaManager():
         :return [str] : list of classes
         """
         return self.datasetLoader.trainDeviceDataLoader.dataLoader.dataset.classes
-        pass
 
     def getMean(self):
-        pass
+        """
+        :return meanPix [tuple] : a 3-vector representing the mean pixel of the training set
+        """
+        sumOfBatchsMeanPix = np.array([0, 0, 0], dtype='float64')
+        for i, traindata in enumerate(self.datasetLoader.trainDeviceDataLoader):
+            images, _ = traindata
+            sumOfBatchsMeanPix += np.sum(np.mean(images.numpy(), axis=(2, 3)), axis=0)
+        meanPix = np.true_divide(sumOfBatchsMeanPix, self.getNumDatapoints()[0])
+        return meanPix
 
     def getStd(self):
         pass

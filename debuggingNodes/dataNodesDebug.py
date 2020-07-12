@@ -58,7 +58,7 @@ class DataNodesDebugPackage():
         try:
             da = DatasetAugmentation()
             datasetLoader = DatasetLoader(self.dataLoaderSettings["dataDir"],
-                                          collateFn=CollateOptions.generalCollate,
+                                          # collateFn=CollateOptions.generalCollate,
                                           dataAugmentationObj=da.transforms)
             logs.debugging.info("testAugmentedDatasetLoader: DatasetLoader creation successful")
         except Exception as e:
@@ -110,6 +110,7 @@ class DataNodesDebugPackage():
         except Exception as e:
             result = False
             logs.debugging.error("testVanillaEdaManager: getNumDatapoints function unsuccessful: %s", e)
+        # debug the getClasses function
         try:
             edaManager.getClasses()
             logs.debugging.info("testAugmentedEdaManager: getClasses function successful")
@@ -127,7 +128,7 @@ class DataNodesDebugPackage():
         try:
             da = DatasetAugmentation()
             datasetLoader = DatasetLoader(self.dataLoaderSettings["dataDir"],
-                                          collateFn=CollateOptions.generalCollate,
+                                          # collateFn=CollateOptions.generalCollate,
                                           dataAugmentationObj=da.transforms)
             edaManager = EdaManager(datasetLoader)
             logs.debugging.info("testAugmentedEdaManager: EdaManager creation successful")
@@ -148,6 +149,13 @@ class DataNodesDebugPackage():
         except Exception as e:
             result = False
             logs.debugging.error("testAugmentedEdaManager: getClasses function unsuccessful: %s", e)
+        # debug the getMean function
+        try:
+            edaManager.getMean()
+            logs.debugging.info("testAugmentedEdaManager: getMean function successful")
+        except Exception as e:
+            result = False
+            logs.debugging.error("testAugmentedEdaManager: getMean function unsuccessful: %s", e)
         return result
 
 
