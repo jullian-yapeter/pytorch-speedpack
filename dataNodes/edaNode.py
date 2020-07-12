@@ -71,14 +71,26 @@ class EdaManager():
 
     def getMean(self):
         """
-        :return meanPix [tuple] : a 3-vector representing the mean pixel of the training set
+        :return meanPix [list] : a 3-vector representing the mean pixel of the training set
         """
         sumOfBatchsMeanPix = np.array([0, 0, 0], dtype='float64')
         for i, traindata in enumerate(self.datasetLoader.trainDeviceDataLoader):
             images, _ = traindata
             sumOfBatchsMeanPix += np.sum(np.mean(images.numpy(), axis=(2, 3)), axis=0)
         meanPix = np.true_divide(sumOfBatchsMeanPix, self.getNumDatapoints()[0])
-        return meanPix
+        return meanPix.reshape(1, 3)
 
     def getStd(self):
-        pass
+        """
+        :return stdPix [list] : a 3-vector representing the standard deviation of the training set's pixel values
+        """
+        meanPix = self.getMean()
+        stdNumerator = np.array([0, 0, 0], dtype='float64')
+        totalPixels = 0
+        for i, traindata in enumerate(self.datasetLoader.trainDeviceDataLoader):
+            images, _ = traindata
+            images = images.numpy().reshape(-1, 3)
+            totalPixels += images.shape[0]
+            stdNumerator += np.sum(np.square(images-meanPix), axis=0)
+        stdPix = np.sqrt(np.true_divide(stdNumerator, totalPixels))
+        return stdPix

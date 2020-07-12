@@ -156,6 +156,13 @@ class DataNodesDebugPackage():
         except Exception as e:
             result = False
             logs.debugging.error("testAugmentedEdaManager: getMean function unsuccessful: %s", e)
+        # debug the getStd function
+        try:
+            edaManager.getStd()
+            logs.debugging.info("testAugmentedEdaManager: getStd function successful")
+        except Exception as e:
+            result = False
+            logs.debugging.error("testAugmentedEdaManager: getStd function unsuccessful: %s", e)
         return result
 
 
