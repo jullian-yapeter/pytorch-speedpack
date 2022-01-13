@@ -6,7 +6,7 @@ kiwisolver==1.2.0
 matplotlib==3.2.2
 mccabe==0.6.1
 numpy==1.18.5
-Pillow==8.1.1
+Pillow==9.0.0
 pycodestyle==2.6.0
 pydocstyle==5.0.2
 pyflakes==2.2.0
